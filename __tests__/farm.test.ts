@@ -13,4 +13,11 @@ describe('Farm', () => {
         expect(inventory).toBeDefined();
         expect(inventory.length).toBeGreaterThan(0);
     });
+    it('Farm can be appraised', async () => {
+        const farm = new Farm(process.env.FARM_ADDRESS);
+        const appraisal = await farm.Appraise();
+        console.log("Farm is worth: ", appraisal);
+        expect(appraisal).toBeDefined();
+        expect(appraisal).toBeGreaterThan(0);
+    });
 })

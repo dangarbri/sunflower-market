@@ -58,6 +58,25 @@ class Farm {
             return Number(amount);
         }
     }
+
+    /**
+     * Return the farm's value in matic
+     */
+    async Appraise(inventory?: Inventory): Promise<number> {
+        if (!inventory) {
+            inventory = await this.Inventory();
+        }
+        const items = inventory.items;
+        const promises = [];
+        for (let idx = 0; idx < items.length; idx++) {
+            const item = items[idx];
+            promises.push(Opensea.Price(inventoryContractAddress, item.nft.identifier).then((price) => {
+                return price * item.quantity;
+            }));
+        }
+        const values = await Promise.all(promises);
+        return values.reduce((total, value) => total + value, 0);
+    }
 }
 
 export { Farm }
