@@ -20,4 +20,12 @@ describe('Farm', () => {
         expect(appraisal).toBeDefined();
         expect(appraisal).toBeGreaterThan(0);
     });
+    it('Farm can be appraised without reloading inventory', async () => {
+        const farm = new Farm(process.env.FARM_ADDRESS);
+        const inventory = await farm.Inventory();
+        const appraisal = await farm.Appraise(inventory);
+        console.log("Farm is worth: ", appraisal);
+        expect(appraisal).toBeDefined();
+        expect(appraisal).toBeGreaterThan(0);
+    });
 })

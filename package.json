@@ -1,6 +1,7 @@
 {
   "name": "sunflower-market",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "main": "build/src/main.js",
   "description": "For calculating how much your crops could net you on opensea.",
   "type": "module",
   "engines": {

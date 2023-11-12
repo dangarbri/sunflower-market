@@ -1,5 +1,8 @@
 import { Farm } from "./farm.js";
 
-const farm = new Farm(process.env.FARM_ADDRESS);
-const inventory = await farm.Inventory();
-inventory.print();
+async function Appraise(farmAddress: string): Promise<number> {
+    const farm = new Farm(farmAddress);
+    return await farm.Appraise();
+}
+
+export { Appraise, Farm }
