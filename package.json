@@ -1,5 +1,5 @@
 {
-  "name": "sunflower-market",
+  "name": "sunflower-land-appraisal",
   "version": "0.0.1",
   "main": "build/src/main.js",
   "description": "For calculating how much your crops could net you on opensea.",
