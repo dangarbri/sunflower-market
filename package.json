@@ -1,25 +1,25 @@
 {
-  "name": "node-typescript-boilerplate",
+  "name": "sunflower-market",
   "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "description": "For calculating how much your crops could net you on opensea.",
   "type": "module",
   "engines": {
-    "node": ">= 18.12 <19"
+    "node": ">= 20.9.0"
   },
   "devDependencies": {
-    "@types/jest": "~29.5",
-    "@types/node": "~18",
-    "@typescript-eslint/eslint-plugin": "~6.2",
-    "@typescript-eslint/parser": "~6.2",
-    "eslint": "~8.46",
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9",
+    "@typescript-eslint/eslint-plugin": "^6.10",
+    "@typescript-eslint/parser": "^6.10",
+    "eslint": "^8.53",
     "eslint-config-prettier": "~9.0",
-    "eslint-plugin-jest": "~27.2",
-    "jest": "~29.6",
+    "eslint-plugin-jest": "^27.6",
+    "jest": "^29.7.0",
     "prettier": "~3.0",
     "rimraf": "~5.0",
     "ts-api-utils": "~1.0",
     "ts-jest": "~29.1",
-    "typescript": "~5.1"
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "node build/src/main.js",
