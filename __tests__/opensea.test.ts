@@ -7,14 +7,14 @@ describe('Opensea', () => {
     });
 
     it('Can get the lowest price of a listing', async () => {
-        const price = await Opensea.Price('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 210);
+        const price = await Opensea.GetPrice('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 210);
         expect(price).toBeGreaterThan(0.01);
-        const price2 = await Opensea.Price('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 202);
+        const price2 = await Opensea.GetPrice('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 202);
         expect(price2).toBeLessThan(0.001)
     });
 
     it('Returns 0 for listings that are not for sale', async () => {
-        const price = await Opensea.Price('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 731);
+        const price = await Opensea.GetPrice('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 731);
         expect(price).toBe(0);
     })
 

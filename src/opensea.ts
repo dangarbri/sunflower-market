@@ -42,9 +42,9 @@ class Opensea {
         return nfts;
     }
 
-    static async Price(address: string, id: number): Promise<number> {
+    static async GetPrice(address: string, id: number | string): Promise<number> {
         const listing = await this.GetListings(address, id);
-        if (listing['length'] > 0) {
+        if (listing['orders'].length > 0) {
             const bundlePrice = parseInt(listing['orders'][0]['current_price']);
             const quantity = listing['orders'][0]['remaining_quantity'];
             return bundlePrice / quantity;
@@ -56,7 +56,7 @@ class Opensea {
     /**
      * Get all active, valid listings for a single collection.
      */
-    static async GetListings(address: string, id: number, limit: number = 1): Promise<object> {
+    static async GetListings(address: string, id: number | string, limit: number = 1): Promise<object> {
         return this.get(`/orders/matic/seaport/listings?asset_contract_address=${address}&order_by=eth_price&order_direction=asc&token_ids=${id}&limit=${limit}`);
     }
 }
