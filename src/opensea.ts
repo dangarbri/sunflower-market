@@ -44,9 +44,13 @@ class Opensea {
 
     static async GetPrice(address: string, id: number): Promise<number> {
         const listing = await this.GetListings(address, id);
-        const bundlePrice = parseInt(listing['orders'][0]['current_price']);
-        const quantity = listing['orders'][0]['remaining_quantity'];
-        return bundlePrice / quantity;
+        if (listing['length'] > 0) {
+            const bundlePrice = parseInt(listing['orders'][0]['current_price']);
+            const quantity = listing['orders'][0]['remaining_quantity'];
+            return bundlePrice / quantity;
+        } else {
+            return 0;
+        }
     }
 
     /**

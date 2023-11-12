@@ -13,6 +13,11 @@ describe('Opensea', () => {
         expect(price2).toBeLessThan(0.001)
     });
 
+    it('Returns 0 for listings that are not for sale', async () => {
+        const price = await Opensea.GetPrice('0x22d5f9b75c524fec1d6619787e582644cd4d7422', 731);
+        expect(price).toBe(0);
+    })
+
     it('Can list NFTs for an account', async () => {
         const nfts = await Opensea.ListNFTs(process.env.FARM_ADDRESS);
         expect(nfts.length).toBeGreaterThan(0);
