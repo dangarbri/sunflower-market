@@ -30,15 +30,15 @@ class Opensea {
         const endpoint = `/chain/matic/account/${address}/nfts`;
         let nfts: Array<NFT> = [];
         let response = await this.get(endpoint);
-        if (response.hasOwnProperty('nfts')) {
+        if (Object.hasOwn(response, 'nfts')) {
             nfts = nfts.concat(response['nfts']);
         }
         do {
             response = await this.get(`${endpoint}&next=${response['next']}`);
-            if (response.hasOwnProperty('nfts')) {
+            if (Object.hasOwn(response, 'nfts')) {
                 nfts = nfts.concat(response['nfts']);
             }
-        } while (response.hasOwnProperty('next'));
+        } while (Object.hasOwn(response, 'next'));
         return nfts;
     }
 

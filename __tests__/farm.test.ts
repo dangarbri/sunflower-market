@@ -9,7 +9,7 @@ describe('Farm', () => {
     });
     it('Can inventory the farm', async () => {
         const farm = new Farm(process.env.FARM_ADDRESS);
-        let inventory = await farm.Inventory();
+        const inventory = await farm.Inventory();
         expect(inventory).toBeDefined();
         expect(inventory.length).toBeGreaterThan(0);
     });
