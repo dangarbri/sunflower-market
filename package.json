@@ -36,6 +36,10 @@
     "test:watch": "jest --watch"
   },
   "author": "Daniel Garcia Briseno",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dangarbri/sunflower-market"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "tslib": "~2.6",
