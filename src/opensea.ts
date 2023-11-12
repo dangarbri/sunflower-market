@@ -42,7 +42,7 @@ class Opensea {
         return nfts;
     }
 
-    static async GetPrice(address: string, id: number): Promise<number> {
+    static async Price(address: string, id: number): Promise<number> {
         const listing = await this.GetListings(address, id);
         if (listing['length'] > 0) {
             const bundlePrice = parseInt(listing['orders'][0]['current_price']);
