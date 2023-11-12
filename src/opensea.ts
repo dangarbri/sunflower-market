@@ -1,3 +1,9 @@
+interface NFT {
+    identifier: string;
+    contract: string;
+    name: string;
+}
+
 /**
  * Official opensea sdk is out of date.
  * The example using 'api' is not working.
@@ -9,12 +15,31 @@ class Opensea {
     private static baseUrl = "https://api.opensea.io/api/v2";
     private static apiKey = process.env.OPENSEA_API_KEY;
 
-    private static get(path: string): Promise<Response> {
+    private static get(path: string): Promise<object> {
         return fetch(`${this.baseUrl}${path}`, {
             headers: {
                 'x-api-key': this.apiKey
             }
-        });
+        }).then((response) => response.json() as Promise<object>);
+    }
+
+    /**
+     * Lists all NFTs for a given address
+     */
+    static async ListNFTs(address: string): Promise<Array<NFT>> {
+        const endpoint = `/chain/matic/account/${address}/nfts`;
+        let nfts: Array<NFT> = [];
+        let response = await this.get(endpoint);
+        if (response.hasOwnProperty('nfts')) {
+            nfts = nfts.concat(response['nfts']);
+        }
+        do {
+            response = await this.get(`${endpoint}&next=${response['next']}`);
+            if (response.hasOwnProperty('nfts')) {
+                nfts = nfts.concat(response['nfts']);
+            }
+        } while (response.hasOwnProperty('next'));
+        return nfts;
     }
 
     static async GetPrice(address: string, id: number): Promise<number> {
@@ -28,9 +53,8 @@ class Opensea {
      * Get all active, valid listings for a single collection.
      */
     static async GetListings(address: string, id: number, limit: number = 1): Promise<object> {
-        const response = await this.get(`/orders/matic/seaport/listings?asset_contract_address=${address}&order_by=eth_price&order_direction=asc&token_ids=${id}&limit=${limit}`);
-        return await response.json() as object;
+        return this.get(`/orders/matic/seaport/listings?asset_contract_address=${address}&order_by=eth_price&order_direction=asc&token_ids=${id}&limit=${limit}`);
     }
 }
 
-export { Opensea }
+export { Opensea, NFT }
