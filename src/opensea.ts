@@ -17,11 +17,18 @@ class Opensea {
         });
     }
 
+    static async GetPrice(address: string, id: number): Promise<number> {
+        const listing = await this.GetListings(address, id);
+        const bundlePrice = parseInt(listing['orders'][0]['current_price']);
+        const quantity = listing['orders'][0]['remaining_quantity'];
+        return bundlePrice / quantity;
+    }
+
     /**
      * Get all active, valid listings for a single collection.
      */
-    static async GetListings(address: string, id: number): Promise<object> {
-        const response = await this.get(`/orders/matic/seaport/listings?asset_contract_address=${address}&order_by=eth_price&order_direction=asc&token_ids=${id}`);
+    static async GetListings(address: string, id: number, limit: number = 1): Promise<object> {
+        const response = await this.get(`/orders/matic/seaport/listings?asset_contract_address=${address}&order_by=eth_price&order_direction=asc&token_ids=${id}&limit=${limit}`);
         return await response.json() as object;
     }
 }
